@@ -19,7 +19,7 @@ public sealed class ZadaniaLinq
         var query = from s in DaneUczelni.Studenci
             where s.Miasto.Equals("Warsaw")
             select $"{s.NumerIndeksu}, {s.Imie}, {s.Nazwisko}, {s.Miasto}";
-        
+        return query;
         throw Niezaimplementowano(nameof(Zadanie01_StudenciZWarszawy));
     }
 
@@ -34,6 +34,9 @@ public sealed class ZadaniaLinq
     /// </summary>
     public IEnumerable<string> Zadanie02_AdresyEmailStudentow()
     {
+        var query = from s in DaneUczelni.Studenci
+            select $"{s.Email}";
+        return query;
         throw Niezaimplementowano(nameof(Zadanie02_AdresyEmailStudentow));
     }
 
@@ -49,6 +52,10 @@ public sealed class ZadaniaLinq
     /// </summary>
     public IEnumerable<string> Zadanie03_StudenciPosortowani()
     {
+        var query = from s in DaneUczelni.Studenci
+            orderby s.Nazwisko, s.Imie
+            select $"{s.NumerIndeksu}, {s.Nazwisko}, {s.Imie}";
+        return query;
         throw Niezaimplementowano(nameof(Zadanie03_StudenciPosortowani));
     }
 
@@ -64,6 +71,9 @@ public sealed class ZadaniaLinq
     /// </summary>
     public IEnumerable<string> Zadanie04_PierwszyPrzedmiotAnalityczny()
     {
+        var query = from s in DaneUczelni.Przedmioty
+            where s.Kategoria.Equals("Analytics")
+                
         throw Niezaimplementowano(nameof(Zadanie04_PierwszyPrzedmiotAnalityczny));
     }
 
