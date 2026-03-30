@@ -71,8 +71,11 @@ public sealed class ZadaniaLinq
     /// </summary>
     public IEnumerable<string> Zadanie04_PierwszyPrzedmiotAnalityczny()
     {
-        var query = from s in DaneUczelni.Przedmioty
+        var query = (from s in DaneUczelni.Przedmioty
             where s.Kategoria.Equals("Analytics")
+            select $"{s.Nazwa}, {s.DataStartu}").Take(1);
+        if (query.Any()) return query;
+        else Console.WriteLine("Nie znaleziono rekordów");
                 
         throw Niezaimplementowano(nameof(Zadanie04_PierwszyPrzedmiotAnalityczny));
     }
@@ -91,6 +94,11 @@ public sealed class ZadaniaLinq
     /// </summary>
     public IEnumerable<string> Zadanie05_CzyIstniejeNieaktywneZapisanie()
     {
+        //string res = DaneUczelni.Zapisy.Any(s => s.CzyAktywny == true) ? "True" : "False";
+        var query = from s in DaneUczelni.Zapisy
+            select $"{s.CzyAktywny}";
+        return query;
+        //todo
         throw Niezaimplementowano(nameof(Zadanie05_CzyIstniejeNieaktywneZapisanie));
     }
 
@@ -106,6 +114,12 @@ public sealed class ZadaniaLinq
     /// </summary>
     public IEnumerable<string> Zadanie06_CzyWszyscyProwadzacyMajaKatedre()
     {
+        var query = from s in DaneUczelni.Prowadzacy
+            select new
+            {
+                
+            }
+        
         throw Niezaimplementowano(nameof(Zadanie06_CzyWszyscyProwadzacyMajaKatedre));
     }
 
