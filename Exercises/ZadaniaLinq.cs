@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using LinqConsoleLab.PL.Data;
 
 namespace LinqConsoleLab.PL.Exercises;
@@ -115,11 +116,8 @@ public sealed class ZadaniaLinq
     public IEnumerable<string> Zadanie06_CzyWszyscyProwadzacyMajaKatedre()
     {
         var query = from s in DaneUczelni.Prowadzacy
-            select new
-            {
-                
-            }
-        
+            select (s.Katedra.Count() == DaneUczelni.Prowadzacy.Count()).ToString();
+        return query;
         throw Niezaimplementowano(nameof(Zadanie06_CzyWszyscyProwadzacyMajaKatedre));
     }
 
@@ -134,6 +132,10 @@ public sealed class ZadaniaLinq
     /// </summary>
     public IEnumerable<string> Zadanie07_LiczbaAktywnychZapisow()
     {
+        var query = from s in DaneUczelni.Zapisy
+            where s.CzyAktywny == true
+            select DaneUczelni.Zapisy.Count().ToString();
+        return query;
         throw Niezaimplementowano(nameof(Zadanie07_LiczbaAktywnychZapisow));
     }
 
@@ -148,6 +150,12 @@ public sealed class ZadaniaLinq
     /// </summary>
     public IEnumerable<string> Zadanie08_UnikalneMiastaStudentow()
     {
+        var distMiasta = DaneUczelni.Studenci.Distinct();
+        var query = from s in distMiasta
+            orderby s.Miasto
+            select $"{s.Miasto}";
+        return query;
+        //todo
         throw Niezaimplementowano(nameof(Zadanie08_UnikalneMiastaStudentow));
     }
 
@@ -163,6 +171,10 @@ public sealed class ZadaniaLinq
     /// </summary>
     public IEnumerable<string> Zadanie09_TrzyNajnowszeZapisy()
     {
+        var ordered = DaneUczelni.Zapisy.OrderByDescending(s => s.DataZapisu);
+        var query = from s in ordered
+            select $"{s.DataZapisu}, {s.StudentId}, {s.PrzedmiotId}";
+        return query.Take(3);
         throw Niezaimplementowano(nameof(Zadanie09_TrzyNajnowszeZapisy));
     }
 
